@@ -108,10 +108,12 @@ st.write("# *Análisis de preguntas por rubro*")
 seleccione_pregunta = ["5- Tiene planeado realizar inversiones en 2019?",
                        '6- ¿Cómo evalúa el momento actual para invertir en su empresa?',
                        "7- ¿Con qué porcentaje de su capacidad instalada está produciendo su empresa en la actualidad? ",
-                       "8- Comparando los precios actuales de la economía con los que habrá dentro de un año, es decir, en diciembre de 2019, ¿en qué porcentaje espera que los precios suban en los próximos doce meses?"]
+                       "8- Comparando los precios actuales de la economía con los que habrá dentro de un año, es decir, en diciembre de 2019, ¿en qué porcentaje espera que los precios suban en los próximos doce meses?",
+                       "Cantidad de empleados por rubro"]
 pregunta_seleccionada = st.selectbox("Selecciona una pregunta:", seleccione_pregunta)
 if (pregunta_seleccionada == "7- ¿Con qué porcentaje de su capacidad instalada está produciendo su empresa en la actualidad? "):
     pregunta7 = df[["RUBRO","7- ¿Con qué porcentaje de su capacidad instalada está produciendo su empresa en la actualidad? "]].groupby("RUBRO").mean().reset_index()
+    pregunta7 = pregunta7.sort_values(by="7- ¿Con qué porcentaje de su capacidad instalada está produciendo su empresa en la actualidad? ",ascending=False)
     plt.figure(figsize=(8, 8))
     plt.grid(True)
     sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,8)})
@@ -126,6 +128,7 @@ if (pregunta_seleccionada == "7- ¿Con qué porcentaje de su capacidad instalada
 
 if (pregunta_seleccionada == "8- Comparando los precios actuales de la economía con los que habrá dentro de un año, es decir, en diciembre de 2019, ¿en qué porcentaje espera que los precios suban en los próximos doce meses?"):   
     pregunta8 = df[["RUBRO","8- Comparando los precios actuales de la economía con los que habrá dentro de un año, es decir, en diciembre de 2019, ¿en qué porcentaje espera que los precios suban en los próximos doce meses?"]].groupby("RUBRO").mean().reset_index()
+    pregunta8 = pregunta8.sort_values(by="8- Comparando los precios actuales de la economía con los que habrá dentro de un año, es decir, en diciembre de 2019, ¿en qué porcentaje espera que los precios suban en los próximos doce meses?",ascending=False)
     plt.figure(figsize=(8, 8))
     plt.grid(True)
     sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,8)})
@@ -146,6 +149,10 @@ if (pregunta_seleccionada == "5- Tiene planeado realizar inversiones en 2019?"):
         df_pivot[n] = ((df_pivot[n] / df_pivot["Total"] ) ).round(2)
     df_pivot.drop("Total",axis=1,inplace=True)
     df_pivot = df_pivot.reset_index()
+    df_pivot["Si"] = df_pivot["Si"] * 100
+    df_pivot["Lo estoy evaluando"] = df_pivot["Lo estoy evaluando"] * 100
+    df_pivot["No"] = df_pivot["No"] * 100
+    df_pivot["NS/NC"] = df_pivot["NS/NC"] * 100
     plt.figure(figsize=(8, 8))
     plt.grid(True)
     sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,6)})
@@ -171,9 +178,15 @@ if (pregunta_seleccionada == "6- ¿Cómo evalúa el momento actual para invertir
         df_pivot[n] = ((df_pivot[n] / df_pivot["Total"] ) ).round(2)
     df_pivot.drop("Total",axis=1,inplace=True)
     df_pivot = df_pivot.reset_index()
-    plt.figure(figsize=(8, 8))
+    df_pivot["Muy Bueno"] = df_pivot["Muy Bueno"] * 100
+    df_pivot["Bueno"] = df_pivot["Bueno"] * 100
+    df_pivot["Regular"] = df_pivot["Regular"] * 100
+    df_pivot["Malo"] = df_pivot["Malo"] * 100
+    df_pivot["Muy Malo"] = df_pivot["Muy Malo"] * 100
+    df_pivot["NS/NC"] = df_pivot["NS/NC"] * 100
+    plt.figure(figsize=(10,8))
     plt.grid(True)
-    sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,6)})
+    sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(10,6)})
     ax = sns.barplot(x="Muy Bueno", y="RUBRO", data=df_pivot, color="tab:orange", label="Muy Bueno")
     ax = sns.barplot(x="Bueno", y="RUBRO", data=df_pivot, color="tab:orange", label="Bueno")
     ax = sns.barplot(x="Regular", y="RUBRO", data=df_pivot, color="tab:blue", label="Regular", )
@@ -189,3 +202,17 @@ if (pregunta_seleccionada == "6- ¿Cómo evalúa el momento actual para invertir
     plt.tight_layout()
     gráfico6 = plt.gcf()
     st.pyplot(gráfico6)
+if (pregunta_seleccionada == "Cantidad de empleados por rubro"):    
+    empleados_por_rubro = df[["RUBRO","CANTIDAD DE EMPLEADOS DE LA EMPRESA"]].groupby(["RUBRO"]).mean().round(2).reset_index()
+    empleados_por_rubro = empleados_por_rubro.sort_values(by = "CANTIDAD DE EMPLEADOS DE LA EMPRESA" ,ascending=False)
+    plt.figure(figsize=(8, 8))
+    plt.grid(True)
+    sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,8)})
+    # Creamos un grafico de barras horizontal
+    ax = sns.barplot(x="CANTIDAD DE EMPLEADOS DE LA EMPRESA", y="RUBRO" ,data = empleados_por_rubro)
+    # Añadimos las etiquetas y el título
+    ax.set_xlabel('Cantidad')
+    ax.set_ylabel('')
+            # Mostrar el gráfico
+    gráfico7 = plt.gcf()
+    st.pyplot(gráfico7)
