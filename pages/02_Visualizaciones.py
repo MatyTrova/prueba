@@ -31,6 +31,7 @@ with col1 :
             elemento.columns = listaff[0].columns    
         df_concat = pd.concat(listaff, ignore_index=True)    
         tabla = df_concat.groupby('10- ¿Qué tipo de reformas considera que se deberian implementar para mejorar la situacion de su sector?').sum().sort_values(by="count",ascending=False).reset_index()
+        tabla2 = tabla = df_concat.groupby('10- ¿Qué tipo de reformas considera que se deberian implementar para mejorar la situacion de su sector?').sum().sort_values(by="count",ascending=False)
         tabla["%"] = (tabla["count"] / tabla["count"].sum()) * 100
         plt.figure(figsize=(10, 8))
         plt.grid(True)
@@ -47,6 +48,7 @@ with col1 :
 
     else:
         tabla = df[selected_pregunta].value_counts().reset_index()
+        tabla2 = df[selected_pregunta].value_counts()
         tabla["%"] = (tabla["count"] / tabla["count"].sum()) * 100
         plt.figure(figsize=(10, 8))
         plt.grid(True)
@@ -62,8 +64,7 @@ with col1 :
         st.pyplot(gráfico)
 
 with col2 :
-    st.write("# Tabla de datos")
-    st.dataframe(tabla)
+    st.dataframe(tabla2)
 
 
 # Presentación 2do gráfico
