@@ -191,7 +191,7 @@ if (pregunta_seleccionada == "6- ¿Cómo evalúa el momento actual para invertir
     ax = sns.barplot(x="Bueno", y="RUBRO", data=df_pivot, color="tab:green", label="Bueno")
     ax = sns.barplot(x="Regular", y="RUBRO", data=df_pivot, color="tab:grey", label="Regular", )
     ax = sns.barplot(x="Malo", y="RUBRO", data=df_pivot, color="tab:blue", label="Malo")
-    ax = sns.barplot(x="Muy Malo", y="RUBRO", data=df_pivot, color="tab:black", label="Muy Malo")
+    ax = sns.barplot(x="Muy Malo", y="RUBRO", data=df_pivot, color="tab:purple", label="Muy Malo")
     ax = sns.barplot(x="NS/NC", y="RUBRO", data=df_pivot, color="tab:orange", label="NS/NC")
     # Configuar etiquetas y leyenda
     plt.legend(title="Respuestas", bbox_to_anchor=(1.05, 1), loc='upper left')
