@@ -56,7 +56,7 @@ with col1 :
         # Creamos un grafico de barras horizontal
         ax = sns.barplot(y=selected_pregunta, x='%', data=tabla)
         # Añadimos las etiquetas y el título
-        ax.set_ylabel()
+        ax.set_ylabel("")
         ax.set_xlabel('Porcentaje %')
             # Mostrar el gráfico
         gráfico = plt.gcf()
