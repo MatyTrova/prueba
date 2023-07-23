@@ -49,7 +49,7 @@ with col1 :
     else:
         tabla = df[selected_pregunta].value_counts().reset_index()
         tabla["%"] = (tabla["count"] / tabla["count"].sum()) * 100
-        plt.figure(figsize=(10, 8))
+        plt.figure(figsize=(14, 12))
         plt.grid(True)
         sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,6)})
         # Creamos un grafico de barras horizontal
