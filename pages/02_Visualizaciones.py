@@ -105,7 +105,8 @@ st.write("---")
 st.write("# *Análisis de preguntas por rubro*")
 
 # Selección de país
-seleccione_pregunta = ["5- Tiene planeado realizar inversiones en 2019?","6- ¿Cómo evalúa el momento actual para invertir en su empresa?",
+seleccione_pregunta = ["5- Tiene planeado realizar inversiones en 2019?",
+                       '6- ¿Cómo evalúa el momento actual para invertir en su empresa?',
                        "7- ¿Con qué porcentaje de su capacidad instalada está produciendo su empresa en la actualidad? ",
                        "8- Comparando los precios actuales de la economía con los que habrá dentro de un año, es decir, en diciembre de 2019, ¿en qué porcentaje espera que los precios suban en los próximos doce meses?"]
 pregunta_seleccionada = st.selectbox("Selecciona una pregunta:", seleccione_pregunta)
@@ -148,7 +149,7 @@ else:
     plt.figure(figsize=(10, 8))
     plt.grid(True)
     sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,6)})
-    ax = sns.barplot(x="Lo estoy evaluando", y="RUBRO", data=df_pivot, color="tab:orange", label="Lo estoy evaluando")
+    #ax = sns.barplot(x="Lo estoy evaluando", y="RUBRO", data=df_pivot, color="tab:orange", label="Lo estoy evaluando")
     ax = sns.barplot(x="NS/NC", y="RUBRO", data=df_pivot, color="tab:orange", label="NS/NC")
     ax = sns.barplot(x="No", y="RUBRO", data=df_pivot, color="tab:blue", label="No", left=df_pivot["NS/NC"])
     ax = sns.barplot(x="Si", y="RUBRO", data=df_pivot, color="tab:green", label="Si", left=df_pivot["NS/NC"] + df_pivot["No"])
