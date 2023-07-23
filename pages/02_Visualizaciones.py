@@ -33,7 +33,7 @@ with col1 :
         df_concat = pd.concat(listaff, ignore_index=True)  
         tabla = df_concat.groupby('10- ¿Qué tipo de reformas considera que se deberian implementar para mejorar la situacion de su sector?').sum().sort_values(by="count",ascending=False).reset_index()
         tabla["%"] = (tabla["count"] / tabla["count"].sum()) * 100
-        plt.figure(figsize=(10, 8))
+        plt.figure(figsize=(10, 10))
         plt.grid(True)
         sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,8)})
         # Creamos un grafico de barras horizontal
