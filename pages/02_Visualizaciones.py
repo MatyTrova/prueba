@@ -49,14 +49,13 @@ with col1 :
         tabla = df[selected_pregunta].value_counts().reset_index()
         tabla["%"] = (tabla["count"] / tabla["count"].sum()) * 100
         plt.figure(figsize=(10, 8))
-        plt.grid(True)
         sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,6)})
         # Creamos un grafico de barras horizontal
         ax = sns.barplot(x=preguntas, y='%', data=tabla)
         # Añadimos las etiquetas y el título
-        ax.set_ylabel('Porcentaje %',fontsize=12)
+        ax.set_ylabel('Porcentaje %')
         ax.set_xlabel('')
-        ax.set_title(preguntas, fontsize=14)
+        ax.set_title(preguntas)
             # Mostrar el gráfico
         gráfico = plt.gcf()
         st.pyplot(gráfico)
@@ -87,8 +86,7 @@ if (pregunta_seleccionada == "7- ¿Con qué porcentaje de su capacidad instalada
     ax.set_ylabel('')
     ax.set_title(pregunta_seleccionada, fontsize=14)
             # Mostrar el gráfico
-    gráfico3 = plt.gcf()
-    st.pyplot(gráfico3)
+    st.pyplot()
 
 if (pregunta_seleccionada == "8- Comparando los precios actuales de la economía con los que habrá dentro de un año, es decir, en diciembre de 2019, ¿en qué porcentaje espera que los precios suban en los próximos doce meses?"):   
     pregunta8 = df[["RUBRO","8- Comparando los precios actuales de la economía con los que habrá dentro de un año, es decir, en diciembre de 2019, ¿en qué porcentaje espera que los precios suban en los próximos doce meses?"]].groupby("RUBRO").mean().reset_index()
@@ -102,8 +100,7 @@ if (pregunta_seleccionada == "8- Comparando los precios actuales de la economía
     ax.set_ylabel('')
     ax.set_title(pregunta_seleccionada, fontsize=14)
             # Mostrar el gráfico
-    gráfico3 = plt.gcf()
-    st.pyplot(gráfico3)
+    st.pyplot()
 else:
     x = df[["RUBRO",pregunta_seleccionada]].value_counts().reset_index()
     df_pivot = x.pivot_table(index="RUBRO", columns=[pregunta_seleccionada], values='count', fill_value=0)
