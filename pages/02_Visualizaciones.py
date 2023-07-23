@@ -9,9 +9,7 @@ import streamlit as st
 df = pd.read_csv("Datasets/base.csv")
 
 
-st.write("---")
 st.write("# *Variación interanual de la producción promedio*")
-st.write("---")
 
 lista = ["Rubro", "Provincia"]
 rubro_provincia = st.selectbox('Por rubro o por provincia:', lista)
@@ -28,8 +26,8 @@ if (rubro_provincia == "Rubro") :
     ax.set_xlabel('Porcentaje %')
     ax.set_ylabel('')
     # Mostrar el gráfico
-    gráfico3 = plt.gcf()
-    st.pyplot(gráfico3)
+    gráfico03 = plt.gcf()
+    st.pyplot(gráfico03)
 if (rubro_provincia == "Provincia") :
     consigna4 = df[["Provincia  ","1. Variación de la Producción    (diciembre 2018 \nvs. \ndiciembre 2017:)"]].groupby("Provincia  ").mean().round(2).reset_index()
     consigna4["1. Variación de la Producción    (diciembre 2018 \nvs. \ndiciembre 2017:)"] =consigna4["1. Variación de la Producción    (diciembre 2018 \nvs. \ndiciembre 2017:)"] / 100
@@ -44,11 +42,10 @@ if (rubro_provincia == "Provincia") :
     # Mostrar el gráfico
     gráfico3 = plt.gcf()
     st.pyplot(gráfico3)
+
 # Presentación
 st.write("---")
 st.write("# *Análisis de preguntas*")
-st.write("---")
-
 
 preguntas = df.columns[9:14].tolist()
 preguntas.append('10- ¿Qué tipo de reformas considera que se deberian implementar para mejorar la situacion de su sector?')
@@ -78,8 +75,8 @@ with col1 :
         ax.set_ylabel('')
         ax.set_xlabel('Porcentaje %')
         # Mostrar el gráfico
-        gráfico = plt.gcf()
-        st.pyplot(gráfico)
+        gráfico01 = plt.gcf()
+        st.pyplot(gráfico01)
 
     else:
         tabla = df[selected_pregunta].value_counts().reset_index()
@@ -106,7 +103,6 @@ with col2 :
 # Presentación 2do gráfico
 st.write("---")
 st.write("# *Análisis de preguntas por rubro*")
-st.write("---")
 
 # Selección de país
 seleccione_pregunta = ["5- Tiene planeado realizar inversiones en 2019?","6- ¿Cómo evalúa el momento actual para invertir en su empresa?",
@@ -124,8 +120,8 @@ if (pregunta_seleccionada == "7- ¿Con qué porcentaje de su capacidad instalada
     ax.set_xlabel('Porcentaje %')
     ax.set_ylabel('')
             # Mostrar el gráfico
-    gráfico3 = plt.gcf()
-    st.pyplot(gráfico3)
+    gráfico4 = plt.gcf()
+    st.pyplot(gráfico4)
 
 if (pregunta_seleccionada == "8- Comparando los precios actuales de la economía con los que habrá dentro de un año, es decir, en diciembre de 2019, ¿en qué porcentaje espera que los precios suban en los próximos doce meses?"):   
     pregunta8 = df[["RUBRO","8- Comparando los precios actuales de la economía con los que habrá dentro de un año, es decir, en diciembre de 2019, ¿en qué porcentaje espera que los precios suban en los próximos doce meses?"]].groupby("RUBRO").mean().reset_index()
@@ -138,8 +134,8 @@ if (pregunta_seleccionada == "8- Comparando los precios actuales de la economía
     ax.set_xlabel('Porcentaje %')
     ax.set_ylabel('')
             # Mostrar el gráfico
-    gráfico3 = plt.gcf()
-    st.pyplot(gráfico3)
+    gráfico5 = plt.gcf()
+    st.pyplot(gráfico5)
 else:
     x = df[["RUBRO",pregunta_seleccionada]].value_counts().reset_index()
     df_pivot = x.pivot_table(index="RUBRO", columns=[pregunta_seleccionada], values='count', fill_value=0)
@@ -164,5 +160,5 @@ else:
     plt.title(pregunta_seleccionada, fontsize=14)
     # Mostrar el gráfico
     plt.tight_layout()
-    gráfico2 = plt.gcf()
-    st.pyplot(gráfico2)
+    gráfico6 = plt.gcf()
+    st.pyplot(gráfico6)
