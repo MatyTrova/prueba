@@ -11,7 +11,7 @@ st.set_page_config(
 st.title("**Prueba Técnica - Dashboard**")
 
 # Imagen
-st.image("imgs/LOGO-CAME.jpg", caption="logo came", use_column_width=True)
+st.image("imgs/LOGO-CAME.jpg", use_column_width=True)
 # Línea divisoria
 st.markdown("---")
 # Encabezado
