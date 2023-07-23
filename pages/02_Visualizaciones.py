@@ -137,7 +137,7 @@ if (pregunta_seleccionada == "8- Comparando los precios actuales de la economía
             # Mostrar el gráfico
     gráfico5 = plt.gcf()
     st.pyplot(gráfico5)
-else:
+if (pregunta_seleccionada == "5- Tiene planeado realizar inversiones en 2019?"):
     x = df[["RUBRO",pregunta_seleccionada]].value_counts().reset_index()
     df_pivot = x.pivot_table(index="RUBRO", columns=[pregunta_seleccionada], values='count', fill_value=0)
     df_pivot["Total"] = df_pivot.sum(axis=1)
@@ -146,7 +146,6 @@ else:
         df_pivot[n] = ((df_pivot[n] / df_pivot["Total"] ) ).round(2)
     df_pivot.drop("Total",axis=1,inplace=True)
     df_pivot = df_pivot.reset_index()
-    st.dataframe(df_pivot)
     plt.figure(figsize=(8, 8))
     plt.grid(True)
     sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,6)})
@@ -154,6 +153,33 @@ else:
     ax = sns.barplot(x="NS/NC", y="RUBRO", data=df_pivot, color="tab:orange", label="NS/NC")
     ax = sns.barplot(x="No", y="RUBRO", data=df_pivot, color="tab:blue", label="No", left=df_pivot["NS/NC"])
     ax = sns.barplot(x="Si", y="RUBRO", data=df_pivot, color="tab:green", label="Si", left=df_pivot["NS/NC"] + df_pivot["No"])
+    # Configuar etiquetas y leyenda
+    plt.legend(title="Respuestas", bbox_to_anchor=(1.05, 1), loc='upper left')
+    # Etiquetas de los ejes y título
+    plt.xlabel("Porcentaje")
+    plt.ylabel("")
+    # Mostrar el gráfico
+    plt.tight_layout()
+    gráfico6 = plt.gcf()
+    st.pyplot(gráfico6)
+if (pregunta_seleccionada == "6- ¿Cómo evalúa el momento actual para invertir en su empresa?"):
+    x = df[["RUBRO",pregunta_seleccionada]].value_counts().reset_index()
+    df_pivot = x.pivot_table(index="RUBRO", columns=[pregunta_seleccionada], values='count', fill_value=0)
+    df_pivot["Total"] = df_pivot.sum(axis=1)
+    columns = df_pivot.columns[0:]
+    for n in columns :
+        df_pivot[n] = ((df_pivot[n] / df_pivot["Total"] ) ).round(2)
+    df_pivot.drop("Total",axis=1,inplace=True)
+    df_pivot = df_pivot.reset_index()
+    plt.figure(figsize=(8, 8))
+    plt.grid(True)
+    sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,6)})
+    ax = sns.barplot(x="Muy Bueno", y="RUBRO", data=df_pivot, color="tab:orange", label="Muy Bueno")
+    ax = sns.barplot(x="Bueno", y="RUBRO", data=df_pivot, color="tab:orange", label="Bueno")
+    ax = sns.barplot(x="Regular", y="RUBRO", data=df_pivot, color="tab:blue", label="Regular", )
+    ax = sns.barplot(x="Malo", y="RUBRO", data=df_pivot, color="tab:green", label="Malo")
+    ax = sns.barplot(x="Muy Malo", y="RUBRO", data=df_pivot, color="tab:green", label="Muy Malo")
+    ax = sns.barplot(x="NS/NC", y="RUBRO", data=df_pivot, color="tab:green", label="NS/NC")
     # Configuar etiquetas y leyenda
     plt.legend(title="Respuestas", bbox_to_anchor=(1.05, 1), loc='upper left')
     # Etiquetas de los ejes y título
