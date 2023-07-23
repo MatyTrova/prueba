@@ -47,8 +47,8 @@ with col1 :
 
     else:
         tabla = df[selected_pregunta].value_counts().reset_index()
-        tabla2 = df[selected_pregunta].value_counts()
-        tabla2.rename(columns = {selected_pregunta : "categoria"})
+        tabla2 = tabla
+        tabla2.rename(columns = {selected_pregunta : "categoria"},inplace=True)
         tabla["%"] = (tabla["count"] / tabla["count"].sum()) * 100
         plt.figure(figsize=(10, 8))
         plt.grid(True)
