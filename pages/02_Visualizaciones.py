@@ -32,17 +32,16 @@ with col1 :
             elemento.columns = listaff[0].columns    
         df_concat = pd.concat(listaff, ignore_index=True)    
         tabla = df_concat.groupby('10- ¿Qué tipo de reformas considera que se deberian implementar para mejorar la situacion de su sector?').sum().sort_values(by="count",ascending=False).reset_index()
-        tabla2 = tabla = df_concat.groupby('10- ¿Qué tipo de reformas considera que se deberian implementar para mejorar la situacion de su sector?').sum().sort_values(by="count",ascending=False)
         tabla["%"] = (tabla["count"] / tabla["count"].sum()) * 100
-        plt.figure(figsize=(10, 8))
+        plt.figure(figsize=(8, 8))
         plt.grid(True)
         sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,6)})
         # Creamos un grafico de barras horizontal
-        ax = sns.barplot(x=selected_pregunta, y='%', data=tabla)
+        ax = sns.barplot(y=selected_pregunta, x='%', data=tabla)
         # Añadimos las etiquetas y el título
-        ax.set_ylabel('Porcentaje %',fontsize=12)
-        ax.set_xlabel('')
-        ax.set_title(selected_pregunta, fontsize=14)
+        ax.set_ylabel('')
+        ax.set_xlabel('Porcentaje %')
+        ax.set_title(selected_pregunta)
         # Mostrar el gráfico
         gráfico = plt.gcf()
         st.pyplot(gráfico)
