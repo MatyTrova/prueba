@@ -20,6 +20,7 @@ selected_pregunta = st.selectbox('Selecciona un una pregunta:', preguntas)
 col1, col2 = st.columns(2)
 with col1 :
 # Selección de la pregunta
+    
     if (selected_pregunta == '10- ¿Qué tipo de reformas considera que se deberian implementar para mejorar la situacion de su sector?') :
         columnas = df.columns[17:22]
         listaff = []
@@ -47,8 +48,7 @@ with col1 :
 
     else:
         tabla = df[selected_pregunta].value_counts().reset_index()
-        tabla2 = tabla
-        tabla2.rename(columns = {selected_pregunta : "categoria"},inplace=True)
+        tabla2 = df[selected_pregunta].value_counts()
         tabla["%"] = (tabla["count"] / tabla["count"].sum()) * 100
         plt.figure(figsize=(10, 8))
         plt.grid(True)
