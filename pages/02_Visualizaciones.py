@@ -18,7 +18,7 @@ preguntas = df.columns[9:14].tolist()
 preguntas.append('10- ¿Qué tipo de reformas considera que se deberian implementar para mejorar la situacion de su sector?')
 selected_pregunta = st.selectbox('Selecciona un una pregunta:', preguntas)
 
-col1, col2 = st.columns([2, 1])
+col1, col2 = st.columns([3, 1])
 with col1 :
 # Selección de la pregunta
     
