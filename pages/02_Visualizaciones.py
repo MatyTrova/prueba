@@ -42,6 +42,8 @@ with col1:
 
     else:
         tabla = df[selected_pregunta].value_counts().reset_index()
+        st.write(selected_pregunta)
+        st.dataframe(tabla)
         tabla["%"] = (tabla[selected_pregunta] / tabla[selected_pregunta].sum()) * 100  # Corregir aquí: selected_pregunta en lugar de 'count'
         plt.figure(figsize=(10, 8))
         sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize": (8, 6)})
