@@ -27,14 +27,12 @@ with col1 :
         listaff = []
         for elemento in columnas : 
             df_columnas = df[elemento].value_counts().reset_index()
-            listaff.append(df)
+            listaff.append(df_columnas)
         for elemento in listaff :
             elemento.columns = listaff[0].columns    
-        df_concat = pd.concat(listaff, ignore_index=True) 
-        st.dataframe(df_concat)   
+        df_concat = pd.concat(listaff, ignore_index=True)  
         tabla = df_concat.groupby('10- ¿Qué tipo de reformas considera que se deberian implementar para mejorar la situacion de su sector?').sum().sort_values(by="count",ascending=False).reset_index()
         tabla["%"] = (tabla["count"] / tabla["count"].sum()) * 100
-        st.dataframe(tabla)
         plt.figure(figsize=(8, 8))
         plt.grid(True)
         sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,6)})
