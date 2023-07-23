@@ -64,6 +64,7 @@ with col1 :
 with col2 :
     tabla2 = tabla
     tabla2.rename(columns= {selected_pregunta : "categoria"},inplace=True)
+    tabla2.set_index('categoria', inplace=True)
     st.dataframe(tabla2)
 
 
