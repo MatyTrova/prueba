@@ -48,7 +48,6 @@ with col1 :
 
     else:
         tabla = df[selected_pregunta].value_counts().reset_index()
-        tabla2 = df[selected_pregunta].value_counts()
         tabla["%"] = (tabla["count"] / tabla["count"].sum()) * 100
         plt.figure(figsize=(10, 8))
         plt.grid(True)
@@ -58,12 +57,13 @@ with col1 :
         # Añadimos las etiquetas y el título
         ax.set_ylabel('Porcentaje %',fontsize=12)
         ax.set_xlabel('')
-        ax.set_title(selected_pregunta, fontsize=14)
             # Mostrar el gráfico
         gráfico = plt.gcf()
         st.pyplot(gráfico)
 
 with col2 :
+    tabla2 = tabla
+    tabla2 = tabla2.rename(columns= {selected_pregunta : "categoria"})
     st.dataframe(tabla2)
 
 
