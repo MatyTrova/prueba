@@ -63,7 +63,7 @@ with col1 :
 
 with col2 :
     tabla2 = tabla
-    tabla2 = tabla2.rename(columns= {selected_pregunta : "categoria"})
+    tabla2.rename(columns= {selected_pregunta : "categoria"},inplace=True)
     st.dataframe(tabla2)
 
 
