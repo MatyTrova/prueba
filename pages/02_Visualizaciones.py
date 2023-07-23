@@ -41,9 +41,9 @@ if (rubro_provincia == "Provincia") :
     ax.set_xlabel('Porcentaje %')
     ax.set_ylabel('')
     # Exportar el gráfico como imagen en formato PNG
-
     # Mostrar el gráfico
     gráfico3 = plt.gcf()
+    st.pyplot(gráfico3)
 # Presentación
 st.write("---")
 st.write("# *Análisis de preguntas*")
