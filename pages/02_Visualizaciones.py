@@ -12,7 +12,7 @@ df = pd.read_csv("Datasets/base.csv")
 st.write("# *Variación interanual de la producción promedio*")
 
 lista = ["Rubro", "Provincia"]
-rubro_provincia = st.selectbox('Por rubro o por provincia:', lista)
+rubro_provincia = st.selectbox('Selecciona una opción:', lista)
 if (rubro_provincia == "Rubro") : 
     delta_por_rubro = df[["RUBRO","1. Variación de la Producción    (diciembre 2018 \nvs. \ndiciembre 2017:)"]].groupby("RUBRO").mean().round(2).reset_index()
     delta_por_rubro["1. Variación de la Producción    (diciembre 2018 \nvs. \ndiciembre 2017:)"] = delta_por_rubro["1. Variación de la Producción    (diciembre 2018 \nvs. \ndiciembre 2017:)"] / 100
@@ -49,7 +49,7 @@ st.write("# *Análisis de preguntas*")
 
 preguntas = df.columns[9:14].tolist()
 preguntas.append('10- ¿Qué tipo de reformas considera que se deberian implementar para mejorar la situacion de su sector?')
-selected_pregunta = st.selectbox('Selecciona un una pregunta:', preguntas)
+selected_pregunta = st.selectbox('Selecciona una pregunta:', preguntas)
 
 col1, col2 = st.columns([3, 1])
 with col1 :
@@ -146,10 +146,11 @@ else:
         df_pivot[n] = ((df_pivot[n] / df_pivot["Total"] ) ).round(2)
     df_pivot.drop("Total",axis=1,inplace=True)
     df_pivot = df_pivot.reset_index()
-    plt.figure(figsize=(10, 8))
+    st.dataframe(df_pivot)
+    plt.figure(figsize=(8, 8))
     plt.grid(True)
     sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,6)})
-    #ax = sns.barplot(x="Lo estoy evaluando", y="RUBRO", data=df_pivot, color="tab:orange", label="Lo estoy evaluando")
+    ax = sns.barplot(x="Lo estoy evaluando", y="RUBRO", data=df_pivot, color="tab:orange", label="Lo estoy evaluando")
     ax = sns.barplot(x="NS/NC", y="RUBRO", data=df_pivot, color="tab:orange", label="NS/NC")
     ax = sns.barplot(x="No", y="RUBRO", data=df_pivot, color="tab:blue", label="No", left=df_pivot["NS/NC"])
     ax = sns.barplot(x="Si", y="RUBRO", data=df_pivot, color="tab:green", label="Si", left=df_pivot["NS/NC"] + df_pivot["No"])
@@ -158,7 +159,6 @@ else:
     # Etiquetas de los ejes y título
     plt.xlabel("Porcentaje")
     plt.ylabel("")
-    plt.title(pregunta_seleccionada, fontsize=14)
     # Mostrar el gráfico
     plt.tight_layout()
     gráfico6 = plt.gcf()
