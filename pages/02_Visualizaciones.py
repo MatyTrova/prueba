@@ -53,7 +53,7 @@ with col1 :
         plt.grid(True)
         sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,6)})
         # Creamos un grafico de barras horizontal
-        ax = sns.barplot(x=selected_pregunta, y='%', data=tabla)
+        ax = sns.barplot(y=selected_pregunta, x='%', data=tabla)
         # Añadimos las etiquetas y el título
         ax.set_ylabel('Porcentaje %',fontsize=12)
         ax.set_xlabel('')
