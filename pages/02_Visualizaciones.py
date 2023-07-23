@@ -153,9 +153,9 @@ if (pregunta_seleccionada == "5- Tiene planeado realizar inversiones en 2019?"):
     df_pivot["Lo estoy evaluando"] = df_pivot["Lo estoy evaluando"] * 100
     df_pivot["No"] = df_pivot["No"] * 100
     df_pivot["NS/NC"] = df_pivot["NS/NC"] * 100
-    plt.figure(figsize=(8, 8))
+    plt.figure(figsize=(12, 8))
     plt.grid(True)
-    sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,6)})
+    sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(12,6)})
     ax = sns.barplot(x="Lo estoy evaluando", y="RUBRO", data=df_pivot, color="tab:orange", label="Lo estoy evaluando")
     ax = sns.barplot(x="NS/NC", y="RUBRO", data=df_pivot, color="tab:orange", label="NS/NC")
     ax = sns.barplot(x="No", y="RUBRO", data=df_pivot, color="tab:blue", label="No", left=df_pivot["NS/NC"])
@@ -186,7 +186,7 @@ if (pregunta_seleccionada == "6- ¿Cómo evalúa el momento actual para invertir
     df_pivot["NS/NC"] = df_pivot["NS/NC"] * 100
     plt.figure(figsize=(10,8))
     plt.grid(True)
-    sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(10,6)})
+    sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(12,6)})
     ax = sns.barplot(x="Muy Bueno", y="RUBRO", data=df_pivot, color="tab:orange", label="Muy Bueno")
     ax = sns.barplot(x="Bueno", y="RUBRO", data=df_pivot, color="tab:orange", label="Bueno")
     ax = sns.barplot(x="Regular", y="RUBRO", data=df_pivot, color="tab:blue", label="Regular", )
