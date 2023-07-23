@@ -189,7 +189,7 @@ if (pregunta_seleccionada == "6- ¿Cómo evalúa el momento actual para invertir
     sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(12,6)})
     ax = sns.barplot(x="Muy Bueno", y="RUBRO", data=df_pivot, color="tab:pink", label="Muy Bueno")
     ax = sns.barplot(x="Bueno", y="RUBRO", data=df_pivot, color="tab:green", label="Bueno")
-    ax = sns.barplot(x="Regular", y="RUBRO", data=df_pivot, color="tab:skyblue", label="Regular", )
+    ax = sns.barplot(x="Regular", y="RUBRO", data=df_pivot, color="tab:grey", label="Regular", )
     ax = sns.barplot(x="Malo", y="RUBRO", data=df_pivot, color="tab:blue", label="Malo")
     ax = sns.barplot(x="Muy Malo", y="RUBRO", data=df_pivot, color="tab:black", label="Muy Malo")
     ax = sns.barplot(x="NS/NC", y="RUBRO", data=df_pivot, color="tab:orange", label="NS/NC")
