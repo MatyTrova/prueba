@@ -8,11 +8,47 @@ import streamlit as st
 # Carga de datos
 df = pd.read_csv("Datasets/base.csv")
 
+
+st.write("---")
+st.write("# *Variación interanual de la producción promedio*")
+st.write("---")
+
+lista = ["Rubro", "Provincia"]
+rubro_provincia = st.selectbox('Por rubro o por provincia:', lista)
+if (rubro_provincia == "Rubro") : 
+    delta_por_rubro = df[["RUBRO","1. Variación de la Producción    (diciembre 2018 \nvs. \ndiciembre 2017:)"]].groupby("RUBRO").mean().round(2).reset_index()
+    delta_por_rubro["1. Variación de la Producción    (diciembre 2018 \nvs. \ndiciembre 2017:)"] = delta_por_rubro["1. Variación de la Producción    (diciembre 2018 \nvs. \ndiciembre 2017:)"] / 100
+    # Configurar el estilo de la gráfica
+    sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,8)})
+    delta_por_rubro["1. Variación de la Producción    (diciembre 2018 \nvs. \ndiciembre 2017:)"] = delta_por_rubro["1. Variación de la Producción    (diciembre 2018 \nvs. \ndiciembre 2017:)"] * 100
+    f_sorted = delta_por_rubro.sort_values(by="1. Variación de la Producción    (diciembre 2018 \nvs. \ndiciembre 2017:)", ascending=False)
+    # Creamos un grafico de barras horizontal
+    ax = sns.barplot(x="1. Variación de la Producción    (diciembre 2018 \nvs. \ndiciembre 2017:)", y='RUBRO', data=f_sorted)
+    # Añadimos las etiquetas y el título
+    ax.set_xlabel('Porcentaje %')
+    ax.set_ylabel('')
+    # Mostrar el gráfico
+    gráfico3 = plt.gcf()
+    st.pyplot(gráfico3)
+if (rubro_provincia == "Provincia") :
+    consigna4 = df[["Provincia  ","1. Variación de la Producción    (diciembre 2018 \nvs. \ndiciembre 2017:)"]].groupby("Provincia  ").mean().round(2).reset_index()
+    consigna4["1. Variación de la Producción    (diciembre 2018 \nvs. \ndiciembre 2017:)"] =consigna4["1. Variación de la Producción    (diciembre 2018 \nvs. \ndiciembre 2017:)"] / 100
+    sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,8)})
+    ordenado = consigna4.sort_values(by="1. Variación de la Producción    (diciembre 2018 \nvs. \ndiciembre 2017:)", ascending=False)
+    # Creamos un grafico de barras horizontal
+    ax = sns.barplot(x="1. Variación de la Producción    (diciembre 2018 \nvs. \ndiciembre 2017:)", y="Provincia  ", data=ordenado)
+    # Añadimos las etiquetas y el título
+    ax.set_xlabel('Porcentaje %')
+    ax.set_ylabel('')
+    # Exportar el gráfico como imagen en formato PNG
+
+    # Mostrar el gráfico
+    gráfico3 = plt.gcf()
 # Presentación
 st.write("---")
-st.write("# *Análisis de las preguntas de las encuestas*")
+st.write("# *Análisis de preguntas*")
 st.write("---")
-st.write("")
+
 
 preguntas = df.columns[9:14].tolist()
 preguntas.append('10- ¿Qué tipo de reformas considera que se deberian implementar para mejorar la situacion de su sector?')
@@ -68,6 +104,7 @@ with col2 :
 
 
 # Presentación 2do gráfico
+st.write("---")
 st.write("# *Análisis de preguntas por rubro*")
 st.write("---")
 
@@ -78,30 +115,28 @@ seleccione_pregunta = ["5- Tiene planeado realizar inversiones en 2019?","6- ¿C
 pregunta_seleccionada = st.selectbox("Selecciona una pregunta:", seleccione_pregunta)
 if (pregunta_seleccionada == "7- ¿Con qué porcentaje de su capacidad instalada está produciendo su empresa en la actualidad? "):
     pregunta7 = df[["RUBRO","7- ¿Con qué porcentaje de su capacidad instalada está produciendo su empresa en la actualidad? "]].groupby("RUBRO").mean().reset_index()
-    plt.figure(figsize=(10, 8))
+    plt.figure(figsize=(8, 8))
     plt.grid(True)
-    sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,6)})
+    sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,8)})
     # Creamos un grafico de barras horizontal
-    ax = sns.barplot(x="%", y="RUBRO" ,data = pregunta7)
+    ax = sns.barplot(x="7- ¿Con qué porcentaje de su capacidad instalada está produciendo su empresa en la actualidad? ", y="RUBRO" ,data = pregunta7)
     # Añadimos las etiquetas y el título
-    ax.set_xlabel('Porcentaje %',fontsize=12)
+    ax.set_xlabel('Porcentaje %')
     ax.set_ylabel('')
-    ax.set_title(pregunta_seleccionada, fontsize=14)
             # Mostrar el gráfico
     gráfico3 = plt.gcf()
     st.pyplot(gráfico3)
 
 if (pregunta_seleccionada == "8- Comparando los precios actuales de la economía con los que habrá dentro de un año, es decir, en diciembre de 2019, ¿en qué porcentaje espera que los precios suban en los próximos doce meses?"):   
     pregunta8 = df[["RUBRO","8- Comparando los precios actuales de la economía con los que habrá dentro de un año, es decir, en diciembre de 2019, ¿en qué porcentaje espera que los precios suban en los próximos doce meses?"]].groupby("RUBRO").mean().reset_index()
-    plt.figure(figsize=(10, 8))
+    plt.figure(figsize=(8, 8))
     plt.grid(True)
-    sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,6)})
+    sns.set(style='whitegrid', font_scale=1.2, rc={"figure.figsize":(8,8)})
     # Creamos un grafico de barras horizontal
-    ax = sns.barplot(x="%", y="RUBRO" ,data = pregunta8)
+    ax = sns.barplot(x="8- Comparando los precios actuales de la economía con los que habrá dentro de un año, es decir, en diciembre de 2019, ¿en qué porcentaje espera que los precios suban en los próximos doce meses?", y="RUBRO" ,data = pregunta8)
     # Añadimos las etiquetas y el título
-    ax.set_xlabel('Porcentaje %',fontsize=12)
+    ax.set_xlabel('Porcentaje %')
     ax.set_ylabel('')
-    ax.set_title(pregunta_seleccionada, fontsize=14)
             # Mostrar el gráfico
     gráfico3 = plt.gcf()
     st.pyplot(gráfico3)
@@ -112,7 +147,7 @@ else:
     columns = df_pivot.columns[0:]
     for n in columns :
         df_pivot[n] = ((df_pivot[n] / df_pivot["Total"] ) ).round(2)
-    df_pivot.pop("total")  
+    df_pivot.drop("Total",axis=1,inplace=True)
     df_pivot = df_pivot.reset_index()
     plt.figure(figsize=(10, 8))
     plt.grid(True)
