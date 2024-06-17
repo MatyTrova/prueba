@@ -17,7 +17,7 @@ st.image("imgs/LOGO-CAME.jpg", use_column_width=True)
 st.markdown("---")
 
 # Encabezado
-st.header("¡Bienvenido, Claudio!")
+st.header("¡Bienvenido!")
 
 # Texto descriptivo
 st.write("Te doy la bienvenida a mi **Dashboard** de la prueba técnica, una aplicación interactiva diseñada para visualizar los datos sobre el estado actual de las pymes del país en diciembre de 2019")
